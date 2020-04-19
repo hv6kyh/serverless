@@ -14,9 +14,9 @@ custom:
     default: 1
   tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}
   # Load our webpack config
-  webpack:
-    webpackConfig: ./webpack.config.js
-    includeModules: true
+  # webpack:
+  #   webpackConfig: ./webpack.config.js
+  #   includeModules: true
 
 service: hello-serverless
 
@@ -25,11 +25,8 @@ provider:
   runtime: nodejs12.x
   stage: dev
   region: ap-northeast-2
-
-# These environment variables are made available to our functions
-# under process.env.
-environment:
-  tableName: ${self:custom.tableName}
+  environment:
+    tableName: ${self:custom.tableName}
 
 iamRoleStatements:
   - Effect: Allow
@@ -48,36 +45,35 @@ iamRoleStatements:
 
 functions:
   createStory:
-    handler: api/v1/stories/stories.createStory
+    handler: api/v1/stories/create.create
     events:
       - http:
           path: stories
           method: post
   readStories:
-    handler: api/v1/stories/stories.readStories
+    handler: api/v1/stories/list.list
     events:
       - http:
           path: stories
           method: get
   readStory:
-    handler: api/v1/stories/stories.readStory
+    handler: api/v1/stories/get.get
     events:
       - http:
           path: stories/{id}
           method: get
   updateStory:
-    handler: api/v1/stories/stories.updateStory
+    handler: api/v1/stories/update.update
     events:
       - http:
           path: stories/{id}
           method: patch
   deleteStory:
-    handler: api/v1/stories/stories.deleteStory
+    handler: api/v1/stories/delete.delete
     events:
       - http:
           path: stories/{id}
           method: delete
 
 resources:
-# DynamoDB
   - ${file(resources/dynamodb-table.yml)}

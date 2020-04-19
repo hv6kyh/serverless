@@ -1,8 +1,9 @@
-import AWS from 'aws-sdk';
+const AWS = require('aws-sdk');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
+console.log('process.env.tableName: ', process.env.tableName);
 const params = {
-  TableName: process.env.DYNAMODB_TABLE,
+  TableName: process.env.tableName,
 };
 
 module.exports.list = (event, context, callback) => {

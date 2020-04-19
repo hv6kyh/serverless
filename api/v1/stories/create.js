@@ -1,8 +1,8 @@
-// const uuid = require('uuid');
-// const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const uuid = require('uuid');
+const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 
-import AWS from 'aws-sdk';
-import uuid from 'uuid';
+// import AWS from 'aws-sdk';
+// import uuid from 'uuid';
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
