@@ -1,0 +1,23 @@
+{
+  "name": "hello-serverless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hv6kyh/serverless.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hv6kyh/serverless/issues"
+  },
+  "homepage": "https://github.com/hv6kyh/serverless#readme",
+  "dependencies": {
+    "aws-sdk": "^2.658.0",
+    "uuid": "^7.0.3"
+  }
+}

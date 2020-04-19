@@ -47,38 +47,32 @@ iamRoleStatements:
       - "Fn::GetAtt": [ NotesTable, Arn ]
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: hello
-          method: get
   createStory:
-    handler: src/stories.createStory
+    handler: api/v1/stories/stories.createStory
     events:
       - http:
           path: stories
           method: post
   readStories:
-    handler: src/stories.readStories
+    handler: api/v1/stories/stories.readStories
     events:
       - http:
           path: stories
           method: get
   readStory:
-    handler: src/stories.readStory
+    handler: api/v1/stories/stories.readStory
     events:
       - http:
           path: stories/{id}
           method: get
   updateStory:
-    handler: src/stories.updateStory
+    handler: api/v1/stories/stories.updateStory
     events:
       - http:
           path: stories/{id}
           method: patch
   deleteStory:
-    handler: src/stories.deleteStory
+    handler: api/v1/stories/stories.deleteStory
     events:
       - http:
           path: stories/{id}
