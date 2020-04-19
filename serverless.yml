@@ -13,12 +13,20 @@ custom:
     prod: 5
     default: 1
   tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}
+  customDomain:
+    domainName: kimyoungho.ga
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
   # Load our webpack config
   # webpack:
   #   webpackConfig: ./webpack.config.js
   #   includeModules: true
 
 service: hello-serverless
+
+plugins:
+  - serverless-domain-manager
 
 provider:
   name: aws
@@ -27,21 +35,18 @@ provider:
   region: ap-northeast-2
   environment:
     tableName: ${self:custom.tableName}
-
-iamRoleStatements:
-  - Effect: Allow
-    Action:
-      - dynamodb:DescribeTable
-      - dynamodb:Query
-      - dynamodb:Scan
-      - dynamodb:GetItem
-      - dynamodb:PutItem
-      - dynamodb:UpdateItem
-      - dynamodb:DeleteItem
-    # Restrict our IAM role permissions to
-    # the specific table for the stage
-    Resource:
-      - "Fn::GetAtt": [ NotesTable, Arn ]
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - "Fn::GetAtt": [ NotesTable, Arn ]
 
 functions:
   createStory:
