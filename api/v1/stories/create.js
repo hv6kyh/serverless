@@ -8,7 +8,9 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime();
+  console.log('event: ', event);
   const data = JSON.parse(event.body);
+  console.log(typeof data.text);
   if (typeof data.text !== 'string') {
     console.error('Validation Failed');
     callback(null, {
@@ -20,9 +22,9 @@ module.exports.create = (event, context, callback) => {
   }
 
   const params = {
-    TableName: process.env.DYNAMODB_TABLE,
+    TableName: process.env.tableName,
     Item: {
-      id: uuid.v1(),
+      storyId: uuid.v1(),
       text: data.text,
       checked: false,
       createdAt: timestamp,

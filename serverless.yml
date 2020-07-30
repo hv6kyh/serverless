@@ -4,8 +4,8 @@ custom:
   # 없다면 provider 블록의 값으로 대체함
   stage: ${opt:stage, self:provider.stage}
   # 테이블의 이름은 환경에 따라 다름
-  # 예) stage=dev라면 테이블의 이름은 dev-notes임
-  tableName: ${self:custom.stage}-notes
+  # 예) stage=dev라면 테이블의 이름은 dev-stories임
+  tableName: ${self:custom.stage}-stories
   # Set our DynamoDB throughput for prod and all other non-prod stages.
   # 테이블의 읽기/쓰기 용량을 설정하기 위해 tableThroughputs라는 커스텀 변수를 정의함
   # 환경에 prod라면 5, 나머지는 1
@@ -27,6 +27,7 @@ service: hello-serverless
 
 plugins:
   - serverless-domain-manager
+  - serverless-offline
 
 provider:
   name: aws
@@ -46,7 +47,7 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
-        - "Fn::GetAtt": [ NotesTable, Arn ]
+        - "Fn::GetAtt": [ StoriesTable, Arn ]
 
 functions:
   createStory:

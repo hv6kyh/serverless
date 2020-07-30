@@ -1,17 +1,17 @@
 Resources:
-  NotesTable:
+  StoriesTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: ${self:custom.tableName}
       AttributeDefinitions:
-        - AttributeName: userId
+        - AttributeName: storyId
           AttributeType: S
-        - AttributeName: noteId
+        - AttributeName: text
           AttributeType: S
       KeySchema:
-        - AttributeName: userId
+        - AttributeName: storyId
           KeyType: HASH
-        - AttributeName: noteId
+        - AttributeName: text
           KeyType: RANGE
       # Set the capacity based on the stage
       ProvisionedThroughput:
