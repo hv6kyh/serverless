@@ -19,15 +19,19 @@ custom:
     stage: ${self:provider.stage}
     createRoute53Record: true
   # Load our webpack config
-  # webpack:
-  #   webpackConfig: ./webpack.config.js
-  #   includeModules: true
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
 
 service: hello-serverless
 
 plugins:
   - serverless-domain-manager
   - serverless-offline
+  - serverless-webpack
+
+package:
+  individually: true
 
 provider:
   name: aws
@@ -57,7 +61,7 @@ functions:
           path: stories
           method: post
   readStories:
-    handler: api/v1/stories/list.list
+    handler: api/v1/stories/list.list2
     events:
       - http:
           path: stories

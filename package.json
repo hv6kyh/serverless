@@ -19,10 +19,19 @@
   "homepage": "https://github.com/hv6kyh/serverless#readme",
   "dependencies": {
     "aws-sdk": "^2.658.0",
+    "source-map-support": "^0.5.19",
     "uuid": "^7.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-source-map-support": "^2.1.2",
     "serverless-domain-manager": "^3.3.1",
-    "serverless-offline": "^6.5.0"
+    "serverless-offline": "^6.5.0",
+    "serverless-webpack": "^5.3.3",
+    "webpack": "^4.44.1",
+    "webpack-node-externals": "^1.7.2"
   }
 }
