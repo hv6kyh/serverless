@@ -99,13 +99,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
 
 
-const AWS = __webpack_require__(/*! aws-sdk */ "aws-sdk");
-
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-console.log('process.env.tableName: ', process.env.tableName);
-const params = {
-  TableName: process.env.tableName
-}; // module.exports.list = (event, context, callback) => {
+// const AWS = require('aws-sdk');
+// const dynamoDb = new AWS.DynamoDB.DocumentClient();
+// console.log('process.env.tableName: ', process.env.tableName);
+// const params = {
+//   TableName: process.env.tableName,
+// };
+// module.exports.list = (event, context, callback) => {
 //   // fetch all todos from the database
 //   dynamoDb.scan(params, (error, result) => {
 //     // handle potential errors
@@ -126,21 +126,33 @@ const params = {
 //     callback(null, response);
 //   });
 // };
+const list = (event, context, callback) => {
+  const p = new Promise((resolve, reject) => {
+    dynamoDb.scan(params, (error, result) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+      }
 
-/* harmony default export */ __webpack_exports__["default"] = (list2 = (event, context, callback) => {
-  callback(null, 'hi');
-});
+      resolve(result.Items);
+    });
+  });
+  callback(null, p);
+}; // const list = (event) => {
+//   const p = new Promise((resolve, reject) => {
+//     dynamoDb.scan(params, (error, result) => {
+//       if (error) {
+//         console.error(error);
+//         reject(error);
+//       }
+//       resolve(result.Items);
+//     });
+//   });
+//   return p;
+// }
 
-/***/ }),
 
-/***/ "aws-sdk":
-/*!**************************!*\
-  !*** external "aws-sdk" ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("aws-sdk");
+/* harmony default export */ __webpack_exports__["default"] = (list);
 
 /***/ }),
 

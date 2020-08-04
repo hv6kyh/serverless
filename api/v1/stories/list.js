@@ -1,10 +1,10 @@
-const AWS = require('aws-sdk');
+// const AWS = require('aws-sdk');
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-console.log('process.env.tableName: ', process.env.tableName);
-const params = {
-  TableName: process.env.tableName,
-};
+// const dynamoDb = new AWS.DynamoDB.DocumentClient();
+// console.log('process.env.tableName: ', process.env.tableName);
+// const params = {
+//   TableName: process.env.tableName,
+// };
 
 // module.exports.list = (event, context, callback) => {
 //   // fetch all todos from the database
@@ -29,6 +29,30 @@ const params = {
 //   });
 // };
 
-export default list2 = (event, context, callback) => {
-  callback(null, 'hi');
+const list = (event, context, callback) => {
+  const p = new Promise((resolve, reject) => {
+    dynamoDb.scan(params, (error, result) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+      }
+      resolve(result.Items);
+    });
+  });
+  callback(null, p);
 }
+
+// const list = (event) => {
+//   const p = new Promise((resolve, reject) => {
+//     dynamoDb.scan(params, (error, result) => {
+//       if (error) {
+//         console.error(error);
+//         reject(error);
+//       }
+//       resolve(result.Items);
+//     });
+//   });
+//   return p;
+// }
+
+export default list;

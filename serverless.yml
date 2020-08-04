@@ -61,7 +61,7 @@ functions:
           path: stories
           method: post
   readStories:
-    handler: api/v1/stories/list.list2
+    handler: api/v1/stories/list.list
     events:
       - http:
           path: stories
