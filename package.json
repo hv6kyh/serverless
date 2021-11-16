@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/hv6kyh/serverless#readme",
   "dependencies": {
-    "aws-sdk": "^2.658.0",
+    "aws-sdk": "^2.814.0",
     "source-map-support": "^0.5.19",
     "uuid": "^7.0.3"
   },
